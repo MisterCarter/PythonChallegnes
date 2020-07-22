@@ -1,0 +1,21 @@
+import requests, bz2
+
+url = 'http://www.pythonchallenge.com/pc/ring/guido.html'
+
+page = requests.get(url, auth= ('repeat', 'switch'))
+contents = page.text
+print(contents)
+raw = contents.splitlines()[12:]
+print(raw)
+data = bytes([len(i) for i in raw])
+print (data)
+print(bz2.decompress(data))
+
+# from urllib.request import Request, urlopen
+# import bz2, base64
+#
+# req = Request('http://www.pythonchallenge.com/pc/ring/guido.html')
+# req.add_header('Authorization', 'Basic %s' % base64.b64encode(b'repeat:switch').decode())
+# raw = urlopen(req).read().splitlines()[12:]
+# data = bytes([len(i) for i in raw])
+# print(bz2.decompress(data))
